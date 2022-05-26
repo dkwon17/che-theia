@@ -23,7 +23,7 @@ export function start(context: theia.PluginContext): void {
   });
 
   theia.workspace.onDidChangeTextDocument((e: theia.TextDocumentChangeEvent) => {
-    if (e.document.uri.scheme !== 'output') {
+    if (e.document.uri.scheme !== 'output' && e.contentChanges.length) {
       che.telemetry.event('EDITOR_USED', context.extensionPath, [['programming language', e.document.languageId]]);
     }
   });
